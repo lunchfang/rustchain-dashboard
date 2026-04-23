@@ -1,0 +1,90 @@
+{
+  "name": "rustchain-dashboard",
+  "displayName": "RustChain Dashboard",
+  "description": "RustChain wallet balance, miner status, and bounty board in your editor",
+  "version": "1.0.0",
+  "publisher": "rustchain",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Debuggers",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onView:rustchainDashboard",
+    "onCommand:rustchain.refresh",
+    "onCommand:rustchain.openBounty"
+  ],
+  "main": "./extension/extension.js",
+  "contributes": {
+    "views": {
+      "rustchain": [
+        {
+          "id": "rustchainDashboard",
+          "name": "RustChain Dashboard",
+          "icon": "icons/rustchain.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "rustchainDashboard",
+        "contents": "No wallet configured. Run 'RustChain: Set Wallet' to get started."
+      }
+    ],
+    "commands": [
+      {
+        "command": "rustchain.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "rustchain.openBounty",
+        "title": "Open Bounty Board"
+      },
+      {
+        "command": "rustchain.setWallet",
+        "title": "Set Wallet Name"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "RustChain",
+        "properties": {
+          "rustchain.walletName": {
+            "type": "string",
+            "default": "",
+            "description": "Your RustChain wallet name"
+          },
+          "rustchain.nodeUrl": {
+            "type": "string",
+            "default": "https://50.28.86.131",
+            "description": "RustChain node URL"
+          }
+        }
+      }
+    ],
+    "statusBar": [
+      {
+        "id": "rustchain.balance",
+        "name": "RustChain Balance",
+        "when": "config.rustchain.walletName"
+      }
+    ]
+  },
+  "scripts": {
+    "vsce:package": "vsce package",
+    "vsce:publish": "vsce publish"
+  },
+  "keywords": [
+    "rustchain",
+    "wallet",
+    "miner",
+    "bounty",
+    "cryptocurrency"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/Scottcjn/Rustchain"
+}
